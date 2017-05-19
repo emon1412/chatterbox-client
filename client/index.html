@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <title>chatterbox</title>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
@@ -23,12 +25,32 @@
     <!-- your scripts -->
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
+    <script> $(document).ready(app.init) </script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
     </div>
-    <div id="chats"></div>
+    <div id="chats">
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Room Toggle Button
+        </button>
+        <div class="dropdown-menu" id="#roomSelect">
+          <a class="dropdown-item" href="#">Room1</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Room2</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Room3</a>
+        </div>
+      </div>
+
+      <form class="submit">
+        <input name="userText" type="text"><br>
+        <button class="submit" type="submit" id="send">Submit</button>
+      </form>
+
+    </div>
   </body>
 </html>
