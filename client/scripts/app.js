@@ -8,7 +8,8 @@ var app = {
   },
 
   init: function(){
-
+    $(".chat").on('click', '.username', app.handleUsernameClick);
+    $('.submit').submit(app.handleSubmit);
   },
   send: function() {
     $.ajax({
@@ -50,8 +51,9 @@ var app = {
     <div class="username">${message.username}</div>
     <div class='text'>${message.text}</div>
     <div class='roomname'>${message.roomname}</div>
+    <button class="submit" id="send">Submit</button>
     </div>`;
-    console.log(a)
+
     //fix this dawg
     $( "#chats" ).append(a);
   },
@@ -62,8 +64,9 @@ var app = {
     $('#roomSelect').append(newRoom);
   },
   handleUsernameClick: function() {
-    $('#main').on('click', '.username', function(){
-      console.log('clicked')
-    });
+
+  },
+  handleSubmit: function() {
+
   }
 };
