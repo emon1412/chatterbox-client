@@ -32,24 +32,25 @@
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
     </div>
-    <div id="chats">
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Room Toggle Button
-        </button>
-        <div class="dropdown-menu" id="#roomSelect">
-          <a class="dropdown-item" href="#">Room1</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Room2</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Room3</a>
-        </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Room Toggle Button
+      </button>
+      <div class="dropdown-menu" id="#roomSelect">
+        <a class="dropdown-item" href="#">All</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Room2</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Room3</a>
       </div>
-
-      <form class="submit">
-        <input name="userText" type="text"><br>
-        <button class="submit" type="submit" id="send">Submit</button>
-      </form>
+    </div>
+    <div class="submitForm">
+    <form class="submit">
+      <input name="userText" type="text"><br>
+      <button class="submit" type="submit" id="send">Submit</button>
+    </form>
+  </div>
+    <div id="chats">
 
     </div>
   </body>

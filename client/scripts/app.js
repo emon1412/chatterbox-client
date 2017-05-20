@@ -1,3 +1,8 @@
+//NOTE: Remember to remake config.js based on config example, and put in API keys!!!!!!!!
+
+
+
+
 // YOUR CODE HERE:
 var app = {
     server: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
@@ -11,7 +16,7 @@ var app = {
     console.log('we init')
     $(".chat").on('click', '.username', app.handleUsernameClick);
     $('.submit').submit(app.handleSubmit);
-    // app.fetch()
+    $('#chats').html(app.fetch());
   },
   send: function() {
     $.ajax({
@@ -33,11 +38,14 @@ var app = {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
       url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
+      data: {order: '-createdAt'},
       type: 'GET',
-      data: JSON.stringify(this.message),
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message received', data);
+        for (var i = data.results.length - 1; i >= 0; i--) {
+          app.renderMessage(data.results[i]);
+        }
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -58,7 +66,7 @@ var app = {
     </div>`;
 
     //fix this dawg
-    $( "#chats" ).append(a);
+    $( "#chats" ).prepend(a);
   },
   renderRoom: function(){
     var newRoom = `<div id="roomSelect">
