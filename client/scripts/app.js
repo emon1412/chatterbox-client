@@ -1,8 +1,3 @@
-//NOTE: Remember to remake config.js based on config example, and put in API keys!!!!!!!!
-
-
-
-
 // YOUR CODE HERE:
 var app = {
     server: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
@@ -18,12 +13,12 @@ var app = {
     $('.submit').submit(app.handleSubmit);
     $('#chats').html(app.fetch());
   },
-  send: function() {
+  send: function(message) {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
       url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
       type: 'POST',
-      data: JSON.stringify(this.message),
+      data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent', data);
@@ -38,14 +33,17 @@ var app = {
     $.ajax({
       // This is the url you should use to communicate with the parse API server.
       url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
-      data: {order: '-createdAt'},
       type: 'GET',
+      data: {order: '-createdAt'},
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message received', data);
-        for (var i = data.results.length - 1; i >= 0; i--) {
+        for (var i = 0; i < data.results.length; i++) {
           app.renderMessage(data.results[i]);
+          // console.log(data.results[i].roomname)
         }
+        app.renderRoom(data.results)
+
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -58,6 +56,7 @@ var app = {
   },
   renderMessage: function(message){
     //abstract e.target into message params?
+
     var a = `<div class="chat">
     <div class="username">${message.username}</div>
     <div class='text'>${message.text}</div>
@@ -66,13 +65,35 @@ var app = {
     </div>`;
 
     //fix this dawg
-    $( "#chats" ).prepend(a);
+    $( "#chats" ).append(a.toString())
   },
-  renderRoom: function(){
-    var newRoom = `<div id="roomSelect">
-    <div class='roomname'>${message.roomname}</div>
-    </div>`;
-    $('#roomSelect').append(newRoom);
+  renderRoom: function(array){
+    // var roomArr = roomArr || [];
+    // if (data.roomname) {
+    //   roomArr.push(data.roomname)
+    // }
+    // console.log(roomArr)
+    // var uniqueArr = _.unique(roomArr)
+    // // console.log(uniqueArr)
+    // for (var i = 0; i < uniqueArr.length; i++) {
+    //   var $dropdown = `<div class="dropdown-item">${uniqueArr[i]}</div>`
+    //   // console.log('Dropdown is: ',$dropdown)
+    //   $('#rooms').append($dropdown)
+    // }
+    var roomArr = []
+    for (var i = 0; i < array.length; i++){
+      if (array[i].roomname) {
+        roomArr.push(array[i].roomname)
+      }
+    }
+    var uniqueArr = _.uniq(roomArr)
+    console.log(uniqueArr)
+
+    for (var j = 0; j < uniqueArr.length; j++) {
+      var $dropdown = `<div class="dropdown-item">${uniqueArr[j]}</div>`
+      $('#rooms').append($dropdown)
+    }
+    
   },
   handleUsernameClick: function() {
 
@@ -83,7 +104,7 @@ var app = {
     var message = {
       username: location.search.slice(10),
       text: JSON.stringify(e.target.elements.userText.value),
-      roomname: ''
+      roomname: 'lobby'
     }
     app.renderMessage(message)
     app.send(message);
