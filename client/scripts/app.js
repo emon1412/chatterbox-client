@@ -20,10 +20,10 @@ var app = {
     })
     $('.dropdown').on('click', 'a', function() {
       var room = $(this).attr('data-room');
-      $('#chats').addClass('hide');
+      $('.chat').addClass('hide');
       var classname = '.'+room;
-      console.log(typeof classname)
-      $('#chats').find(classname).removeClass('hide');
+      // console.log(typeof classname)
+      $(classname).removeClass('hide');
     })
 
   },
@@ -89,7 +89,7 @@ var app = {
         roomArr.push(array[i].roomname)
       }
     }
-    var uniqueArr = _.uniq(roomArr)
+    var uniqueArr = _.unique(roomArr)
     // console.log(uniqueArr)
     for (var j = 0; j < uniqueArr.length; j++) {
       var $dropdown = `<li><a class="dropdown-item" data-room="${uniqueArr[j]}"href="#">${uniqueArr[j]}</a></li>`
