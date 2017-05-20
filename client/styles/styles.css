@@ -91,3 +91,7 @@ form input[type=text] {
 .dropdown {
   display:inline-block;
 }
+
+.hide {
+display: none;
+}

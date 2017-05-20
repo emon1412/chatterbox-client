@@ -7,7 +7,7 @@ var app = {
       roomname: 'lobby'
   },
 
-  init: function(){
+  init: function() {
     console.log('we init')
     $(".chat").on('click', '.username', app.handleUsernameClick);
     $('.submit').submit(app.handleSubmit);
@@ -18,6 +18,14 @@ var app = {
       app.clearMessages();
       app.fetch();
     })
+    $('.dropdown').on('click', 'a', function() {
+      var room = $(this).attr('data-room');
+      $('#chats').addClass('hide');
+      var classname = '.'+room;
+      console.log(typeof classname)
+      $('#chats').find(classname).removeClass('hide');
+    })
+
   },
   send: function(message) {
     $.ajax({
@@ -63,12 +71,13 @@ var app = {
   renderMessage: function(message){
     //abstract e.target into message params?
 
-    var a = `<div class="chat">
+    var a = `<div class="chat ${message.roomname}">
     <div class="username">${message.username}</div>
     <div class='text'>${message.text}</div>
     <div class='roomname'>${message.roomname}</div>
 
     </div>`;
+    // console.log(a)
 
     //fix this dawg
     $( "#chats" ).append(a.toString())
@@ -81,10 +90,9 @@ var app = {
       }
     }
     var uniqueArr = _.uniq(roomArr)
-    console.log(uniqueArr)
-
+    // console.log(uniqueArr)
     for (var j = 0; j < uniqueArr.length; j++) {
-      var $dropdown = `<li><a class="dropdown-item" href="#">${uniqueArr[j]}</a></li>`
+      var $dropdown = `<li><a class="dropdown-item" data-room="${uniqueArr[j]}"href="#">${uniqueArr[j]}</a></li>`
       $('.dropdown-menu').append($dropdown)
     }
 
@@ -94,7 +102,7 @@ var app = {
   },
   handleSubmit: function(e) {
     e.preventDefault()
-    console.log('e', e)
+    // console.log('e', e)
     var message = {
       username: location.search.slice(10),
       text: JSON.stringify(e.target.elements.userText.value),
