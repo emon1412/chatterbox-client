@@ -71,12 +71,20 @@ var app = {
   },
   handleSubmit: function(e) {
     e.preventDefault()
-    app.send();
+    console.log('e', e)
+    var message = {
+      username: location.search.slice(10),
+      text: JSON.stringify(e.target.elements.userText.value),
+      roomname: ''
+    }
+    app.renderMessage(message)
+    app.send(message);
+
     //get the values username text & room
     // this.message.username = 'test'
     // this.message.text = e.target.elements.userText.value
     // this.message.roomname = 'room'
-    console.log('e : ', e.target.elements.userText.value)
-    app.renderMessage(e);
+    // console.log('e.target.elements.userText.value : ', e.target.elements.userText.value)
+    // app.renderMessage(e);
   }
 };
