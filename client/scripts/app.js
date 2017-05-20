@@ -12,6 +12,12 @@ var app = {
     $(".chat").on('click', '.username', app.handleUsernameClick);
     $('.submit').submit(app.handleSubmit);
     $('#chats').html(app.fetch());
+    // setInterval(app.clearMessages, 5000)
+    // setInterval(app.fetch, 5000)
+    $('#refresh').on('click', function() {
+      app.clearMessages();
+      app.fetch();
+    })
   },
   send: function(message) {
     $.ajax({
@@ -68,18 +74,6 @@ var app = {
     $( "#chats" ).append(a.toString())
   },
   renderRoom: function(array){
-    // var roomArr = roomArr || [];
-    // if (data.roomname) {
-    //   roomArr.push(data.roomname)
-    // }
-    // console.log(roomArr)
-    // var uniqueArr = _.unique(roomArr)
-    // // console.log(uniqueArr)
-    // for (var i = 0; i < uniqueArr.length; i++) {
-    //   var $dropdown = `<div class="dropdown-item">${uniqueArr[i]}</div>`
-    //   // console.log('Dropdown is: ',$dropdown)
-    //   $('#rooms').append($dropdown)
-    // }
     var roomArr = []
     for (var i = 0; i < array.length; i++){
       if (array[i].roomname) {
@@ -90,10 +84,10 @@ var app = {
     console.log(uniqueArr)
 
     for (var j = 0; j < uniqueArr.length; j++) {
-      var $dropdown = `<div class="dropdown-item">${uniqueArr[j]}</div>`
-      $('#rooms').append($dropdown)
+      var $dropdown = `<li><a class="dropdown-item" href="#">${uniqueArr[j]}</a></li>`
+      $('.dropdown-menu').append($dropdown)
     }
-    
+
   },
   handleUsernameClick: function() {
 

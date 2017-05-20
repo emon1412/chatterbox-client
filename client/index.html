@@ -25,14 +25,23 @@
     <!-- your scripts -->
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
-    <script> $(document).ready(app.init) </script>
+    <script> $(document).ready(app.init);
+    </script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
     </div>
-    <div id="rooms" class="dropdown"></div>
+    <button id="refresh">Get new messages</button>
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul id="rooms" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+  </ul>
+</div>
     <div class="submitForm">
     <form class="submit">
       <input name="userText" type="text"><br>
